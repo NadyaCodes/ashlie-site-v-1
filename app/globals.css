@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+#about-about-0 > div > div.sc-fHjqPf.jMLRGX.sc-hdFWlR.cJSNcO > div > div.sc-jXbUNg.jHZIZE.sc-jlZhew.eqarxG.sc-biptUy.cYvOaX > div > div > a {
+  display: none
+}
+
+#home-home-0 > div > div.sc-fHjqPf.jMLRGX.sc-hdFWlR.cJSNcO > div > div.sc-jXbUNg.jHZIZE.sc-jlZhew.eqarxG.sc-biptUy.cYvOaX > div.sc-jXbUNg.bbOBvc.sc-jlZhew.jTeaMy > div > a {
+  display: none
+}
+
+@layer base {
+  * {
+    @apply text-slate-700
+  }
+  h1 {
+    @apply w-fit mx-auto py-5 text-6xl font-extrabold bg-gradient-to-r from-emerald-950 to-emerald-800 bg-clip-text text-transparent drop-shadow-2xl;
+  }
+  h2 {
+    @apply text-4xl py-5 font-bold;
+  }
+  h3 {
+    @apply text-2xl py-5 font-semibold;
+  }
+  h4 {
+    @apply text-xl py-5 font-semibold;
+  }
+  h5 {
+    @apply text-lg py-5 font-semibold;
+  }
+  h6 {
+    @apply  text-base py-5 font-semibold;
+  }
+  blockquote {
+    @apply text-slate-600 py-5 italic p-1 border-l-4
+  }
+
+  ol > li {
+    @apply list-decimal list-inside px-1
+  }
+
+  ul > li {
+    @apply list-disc list-inside px-2
+  }
+
+  a {
+    @apply text-emerald-600 underline italic
+  }
+
+  p {
+    @apply py-1
+  }
+
+}
+
+@keyframes scaleIn {
+  from {scale: 0.2;}
+  to {scale: 1;}
+}
