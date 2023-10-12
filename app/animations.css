@@ -28,3 +28,52 @@
     
   }
 }
+
+@keyframes flyInSplitUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-20rem);
+    background-color: #4392b1;
+    color: white;
+  }
+  /* 70% {
+    transform: translateX(0);
+  } */
+  80% {
+    transform: translateX(0);
+    background-color: #4392b1;
+    color: white;
+    transition: all;
+  }
+  100% {
+    transform: translateX(0) translateY(-1rem);
+    background-color: white;
+    color: #4392b1;
+    transition: all;
+  }
+}
+@keyframes flyInSplitDown {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem);
+    background-color: white;
+    color: #4392b1;
+  }
+  /* 70% {
+    transform: translateX(0);
+  } */
+  80% {
+    transform: translateX(0);
+    background-color: white;
+    color: #4392b1;
+    transition: all;
+  }
+  100% {
+    transform: translateX(0) translateY(1rem);
+
+    transition: all;
+    background-color: #4392b1;
+    color: white;
+    
+  }
+}

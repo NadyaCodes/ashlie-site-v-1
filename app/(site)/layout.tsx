@@ -1,14 +1,22 @@
 import "../globals.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import Link from "next/link";
+import { Poppins, Simonetta } from "next/font/google";
 import Menu from "./Menu";
 import { getCopywriteContent, getExtraPages } from "@/sanity/sanity-utils";
 import Socials from "./Socials";
 import Logo from "./Logo";
+import Footer from "./Footer";
+import { getHomeContent } from "@/sanity/sanity-utils";
 
 const poppins = Poppins({
   weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const simonetta = Simonetta({
+  weight: ["400"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
@@ -24,40 +32,36 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const homeContent = await getHomeContent();
   const extraPages = await getExtraPages();
   const copywriteObj = await getCopywriteContent();
+  const copywriteString = copywriteObj?.copywrite || "";
   return (
     <html lang="en">
-      <body className={`${poppins.className}`}>
+      <body className={`${poppins.className} min-h-screen`}>
         <header>
           <div className="flex flex-col items-center justify-center">
             <div className="flex flex-row justify-between w-screen">
               <Logo />
-              <Socials />
+              <div className="p-2 flex flex-row justify-around flex-grow items-center">
+                {homeContent.header2.map((element, index) => {
+                  return (
+                    <h2
+                      key={index}
+                      className={`py-1 font-normal text-PAYNESGREY-300 ${simonetta.className}`}
+                    >
+                      {element}
+                    </h2>
+                  );
+                })}
+              </div>
+              {/* <Socials /> */}
             </div>
             <Menu extraPages={extraPages} />
           </div>
         </header>
         <main className="max-w-7xl mx-auto px-5">{children}</main>
-        <footer>
-          <div className="flex flex-col text-center bg-PLATINUM-400 p-3 mt-5">
-            <div>
-              <div>{copywriteObj?.copywrite}</div>
-              <Link href="/privacy" className="m-2">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="m-2">
-                Terms and Conditions
-              </Link>
-            </div>
-            <div className="">
-              Website created by{" "}
-              <a href="https://www.nadyacorscadden.com" target="_blank">
-                Nadya Corscadden
-              </a>
-            </div>
-          </div>
-        </footer>
+        <Footer copywrite={copywriteString} />
       </body>
     </html>
   );

@@ -3,41 +3,33 @@ import Link from "next/link";
 import { Page } from "@/types/Page";
 
 export default function Menu({ extraPages }: { extraPages: Page[] }) {
+  const pagesarray = ["About", "Media", "Gallery", ...extraPages, "Contact"];
+
+  const linkClass =
+    "mx-3 mb-5 p-1 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline border-2 border-transparent hover:border-b-PAYNESGREY-300 hover:text-PAYNESGREY-300  transition-all";
   return (
     <div className="flex flex-wrap items-center">
-      <Link
-        href="/about"
-        className="mx-3 p-3 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline hover:bg-PAYNESGREY-400 hover:text-white transition-all rounded"
-      >
-        About
-      </Link>
-      <Link
-        href="/media"
-        className="mx-3 p-3 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline hover:bg-PAYNESGREY-400 hover:text-white transition-all rounded"
-      >
-        Media
-      </Link>
-      <Link
-        href="/gallery"
-        className="mx-3 p-3 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline hover:bg-PAYNESGREY-400 hover:text-white transition-all rounded"
-      >
-        Gallery
-      </Link>
-      {extraPages.map((page) => (
-        <Link
-          key={page._id}
-          href={`/${page.slug}`}
-          className="mx-3  p-3 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline hover:bg-PAYNESGREY-400 hover:text-white transition-all rounded"
-        >
-          {page.name}
-        </Link>
-      ))}
-      <Link
-        href="/contact"
-        className="mx-3 p-3 lg:mx-5 not-italic text-PAYNESGREY-400 no-underline hover:bg-PAYNESGREY-400 hover:text-white transition-all rounded"
-      >
-        Contact
-      </Link>
+      {pagesarray.map((element) => {
+        if (typeof element === "string") {
+          return (
+            <Link
+              href={`/${element.toLowerCase()}`}
+              className={linkClass}
+              key={element}
+            >
+              {element}
+            </Link>
+          );
+        } else {
+          <Link
+            href={`/${element.slug}`}
+            className={linkClass}
+            key={element._id}
+          >
+            {element.name}
+          </Link>;
+        }
+      })}
     </div>
   );
 }
