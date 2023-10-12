@@ -2,9 +2,6 @@ import {defineConfig, buildLegacyTheme} from 'sanity'
 import {deskTool} from "sanity/desk"
 import schemas from './sanity/schemas'
 
-// div[class^="Navbar_createButton"] {
-//   display: none;
-// }
 
 const props = {
   '--my-white': '#fff',
@@ -52,7 +49,7 @@ export const myTheme = buildLegacyTheme({
 })
 
 const sanityConfig = defineConfig({
-projectId: "yovup7dp",
+projectId: "2qq7t7xg",
 dataset: "production",
 title: "Sanity Boilerplate",
 apiVersion: "2023-10-10",

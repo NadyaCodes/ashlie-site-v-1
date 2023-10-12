@@ -7,6 +7,16 @@ const home = {
   fields: [
     {name: "name", title: "Name", type: "string"},
     {name: "header", title: "Header", type: "string"},
+    {
+      name: "header2",
+      title: "Header 2",
+      type: "array",
+      of: [
+        {
+          type: "string",
+        },
+      ],
+    },
     {...contentBlock , name: "homeContent", title: "Homepage Content"},
     {
       name: "image",

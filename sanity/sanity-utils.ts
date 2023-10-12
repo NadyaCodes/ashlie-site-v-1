@@ -161,6 +161,7 @@ export async function getHomeContent(): Promise<HomeContent> {
       _createdAt,
       name,
       header,
+      header2,
       homeContent,
       "image": image.asset->url,
       alt,

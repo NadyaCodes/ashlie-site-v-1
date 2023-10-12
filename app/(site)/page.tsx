@@ -1,71 +1,89 @@
 import { getDimensions } from "@/helpers/getDimensions";
-import { getHomeContent, getPosts } from "@/sanity/sanity-utils";
+import { getHomeContent } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
-import Link from "next/link";
+import { Simonetta } from "next/font/google";
+
+const simonetta = Simonetta({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default async function Home() {
-  const posts = await getPosts();
   const homeContent = await getHomeContent();
 
-  const heroImageDimensions = getDimensions(homeContent.image);
+  const heroImageDimensions = getDimensions(homeContent?.image);
+
+  const titleArray = Array.from(homeContent?.header);
 
   return (
     <div className="text-center">
-      <h1 className="w-fit mx-auto">Welcome to my Boilerplate</h1>
-      <div className="text-lg my-5">
-        I have many featured posts which can be viewed here:
-      </div>
-      <div className="my-10 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-10">
-        {posts.map((element) => {
+      <h1 className="flex flex-row py-0 pt-5">
+        {titleArray.map((element, index) => {
+          const delay = index * 0.3;
           return (
-            <Link
-              key={element._id}
-              className="flex flex-col place-self-center w-full justify-between font-semibold border-2 border-slate-700 rounded-lg p-3 hover:scale-105 hover:shadow-md transition"
-              style={{ maxWidth: "510px" }}
-              href={`/posts/${element.slug}`}
+            <div
+              className={`opacity-0 text-PAYNESGREY-400 drop-shadow-sm text-7xl p-1 ${simonetta.className}`}
+              style={{
+                animation: `heroHeader 1s linear ${delay}s forwards`,
+              }}
+              key={index}
             >
-              <div className="">
-                {element.image && (
-                  <Image
-                    src={element.image}
-                    alt={
-                      element.alt || element.name || "Description not available"
-                    }
-                    width={500}
-                    height={335}
-                    className="object-cover rounded-lg border border-gray-500"
-                  />
-                )}
-              </div>
-
-              <div className="">{element.name}</div>
-            </Link>
+              {element}
+            </div>
           );
         })}
-      </div>
-      <h2>_____________</h2>
-      <h1>{homeContent?.header}</h1>
-      <div className="flex flex-row justify-around items-center">
-        <div className="m-3">
-          <PortableText value={homeContent.homeContent} />
-        </div>
-        <div className="">
-          <div className="max-w-full">
+      </h1>
+      <div className="">
+        {homeContent?.homeContent && (
+          <div className="m-3 lg:mt-20 z-20 absolute w-1/3">
+            <div className="p-2 m-2 bg-gradient-to-tl from-DAVYGREY-100 via-PLATINUM-200 to-DAVYGREY-100 rounded text-PAYNESGREY-700">
+              {homeContent.header2.map((element, index) => {
+                return (
+                  <h2 key={index} className="py-1 font-normal">
+                    {element}
+                  </h2>
+                );
+              })}
+            </div>
+            <div className="my-10">
+              <PortableText value={homeContent?.homeContent} />
+            </div>
+          </div>
+        )}
+        {homeContent?.image && (
+          <div className="relative">
             <Image
-              src={homeContent.image}
+              src={homeContent?.image}
               alt={
                 homeContent.alt ||
                 homeContent.header ||
                 "No Description Available"
               }
-              width={heroImageDimensions[0]}
-              height={heroImageDimensions[1]}
-              layout="responsive"
-              className="rounded-lg border border-gray-500"
+              width={heroImageDimensions ? heroImageDimensions[0] : 300}
+              height={heroImageDimensions ? heroImageDimensions[1] : 300}
             />
+            <div className="absolute top-0 left-0 w-full h-full">
+              <div
+                className="w-full h-full"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #eef2ef, #eef2ef 30% ,transparent 65%, transparent 90%, #eef2ef 100%)",
+                }}
+              >
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background:
+                      "linear-gradient(0deg, #eef2ef, #eef2ef 2%, transparent 10%, transparent 90%, #eef2ef 98%, #eef2ef 100%)",
+                  }}
+                ></div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

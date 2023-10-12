@@ -5,6 +5,7 @@ export type HomeContent = {
   _createdAt: Date;
   name: string;
   header: string;
+  header2: string[];
   homeContent: PortableTextBlock[]
   image: string;
   alt: string;
